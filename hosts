@@ -1,0 +1,11 @@
+# This is an inventory of kafka hosts>
+
+[sdcc]
+nslskafka01
+nslskafka02
+nslskafka03
+
+[nsls2]
+cmb01
+cmb02
+cmb03
