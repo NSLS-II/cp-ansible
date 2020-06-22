@@ -8,5 +8,5 @@ beamlines = ['amx', 'bmm', 'chx', 'cms', 'csx', 'esm', 'fmx',
              'lix', 'pdf', 'qas', 'rsoxs', 'six', 'smi', 'srx',
              'tes', 'xfm', 'xfp', 'xpd', 'xpdd']
 
-topic_list = [NewTopic(f"{beamline}.bluesky.documents", 3, 3) for beamline in beamlines]
+topic_list = [NewTopic(f"{beamline}.test.bluesky.documents", 3, 3) for beamline in beamlines]
 admin_client.create_topics(topic_list)
