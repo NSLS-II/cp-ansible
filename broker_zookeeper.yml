@@ -1,0 +1,24 @@
+---
+- name: Host Prerequisites
+  hosts: kafka_broker:zookeeper
+  tags: common
+  environment: "{{ proxy_env }}"
+  tasks:
+  - import_role:
+      name: confluent.common
+
+- name: Zookeeper Provisioning
+  hosts: zookeeper
+  tags: zookeeper
+  environment: "{{ proxy_env }}"
+  tasks:
+  - import_role:
+      name: confluent.zookeeper
+
+- name: Kafka Broker Provisioning
+  hosts: kafka_broker
+  tags: kafka_broker
+  environment: "{{ proxy_env }}"
+  tasks:
+  - import_role:
+      name: confluent.kafka_broker
