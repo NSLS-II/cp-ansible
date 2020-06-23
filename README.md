@@ -1,4 +1,31 @@
 
+# NSLS2 Intallation Instructions
+
+Notes:
+* Need to periodically run ssh-add
+* May need to update sudoers file to set requiretty to false
+* May need to use zookeeper-server-stop/start to start zookeepers in the correct order
+* May need to update the ansible version to fix errors.
+* May need to run playbook multiple times.
+* I had to run `sudo apt-get update --fix-missing` on one of the machines.
+* I had to update the java version
+
+Procedure:
+* `git clone https://github.com/NSLS-II/cp-ansible`
+* Checkout the desired branch
+* Make sure that you can connect to all nodes: `ansible -i hosts.yml all -m ping -k -K`
+* Open the required ports on each of the Kafka nodes: 2181, 2888, 3888, 9092, 9091 are needed for the broker_zookeeper playbook
+* Install Kafka brokers, and zookeeper: `ansible-playbook -i hosts.yml broker_zookeeper.yml -k -K -vvv`
+
+Test the installation:
+* `git clone https://github.com/bluesky/bluesky-kafka`
+* `cd bluesky-kafka/bluesky_kafka/tests`
+* 'pytest --kafka-bootstrap-servers "cmb01:9092, cmb02:9092, cmb03:9092"`
+
+Create the default topics:
+* `python cp-ansible/create_bluesky_topics.py`
+
+
 # CP-Ansible
 
 ## Introduction
