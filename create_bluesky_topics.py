@@ -9,4 +9,10 @@ beamlines = ['amx', 'bmm', 'chx', 'cms', 'csx', 'esm', 'fmx',
              'tes', 'xfm', 'xfp', 'xpd', 'xpdd']
 
 topic_list = [NewTopic(f"{beamline}.test.bluesky.documents", 3, 3) for beamline in beamlines]
+
+# Topic for bluesky-kafka tests.
+topic_list.append(NewTopic("bluesky-kafka-test", 3, 3))
+
+print(topic_list)
+
 admin_client.create_topics(topic_list)

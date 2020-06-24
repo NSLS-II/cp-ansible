@@ -17,13 +17,24 @@
 * Open the required ports on each of the Kafka nodes: 2181, 2888, 3888, 9092, 9091 are needed for the broker_zookeeper playbook
 * Install Kafka brokers, and zookeeper: `ansible-playbook -i hosts.yml broker_zookeeper.yml -k -K -vvv`
 
-## Test the installation
+## Create a topic.
+* `kafka-topics --create --zookeeper cmb01:2181 --replication-factor 3 --partitions 3 --topic bluesky-kafka-test`
+
+## Describe a topic.
+* `kafka-topics --describe --topic bluesky-kafka-test --bootstrap-server=cmb01:9092`
+
+## Run benchmark with replication ack = all.
+* `kafka-producer-perf-test   --topic bluesky-kafka-test   --num-records 50000000   --record-size 100   --throughput -1   --producer-props acks=all   bootstrap.servers="cmb01:9092, cmb02:9092, cmb03:9092"   buffer.memory=67108864   batch.size=8196`
+
+## Run Bluesky tests.
 * `git clone https://github.com/bluesky/bluesky-kafka`
 * `cd bluesky-kafka/bluesky_kafka/tests`
 * `pytest --kafka-bootstrap-servers "cmb01:9092, cmb02:9092, cmb03:9092"`
 
-## Create the default topics
+## Create the default topics.
+## Currently creating topics with python is not working.
 * `python cp-ansible/create_bluesky_topics.py`
+
 
 
 # CP-Ansible
