@@ -31,8 +31,8 @@
 * `cd bluesky-kafka/bluesky_kafka/tests`
 * `pytest --kafka-bootstrap-servers "cmb01:9092, cmb02:9092, cmb03:9092"`
 
-## Create the default topics.
-## Currently creating topics with python is not working.
+## Create the default topics
+* Currently creating topics with python is not working.
 * `python cp-ansible/create_bluesky_topics.py`
 
 
