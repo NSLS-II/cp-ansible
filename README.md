@@ -1,7 +1,7 @@
 
 # NSLS2 Intallation Instructions
 
-## Notes
+## Installation notes
 * Need to periodically run ssh-add
 * May need to update sudoers file to set requiretty to false
 * May need to use zookeeper-server-stop/start to start zookeepers in the correct order
@@ -17,6 +17,9 @@
 * Open the required ports on each of the Kafka nodes: 2181, 2888, 3888, 9092, 9091 are needed for the broker_zookeeper playbook
 * Install Kafka brokers, and zookeeper: `ansible-playbook -i hosts.yml broker_zookeeper.yml -k -K -vvv`
 
+
+# Testing
+
 ## Create a topic.
 * `kafka-topics --create --zookeeper cmb01:2181 --replication-factor 3 --partitions 3 --topic bluesky-kafka-test`
 
@@ -31,10 +34,17 @@
 * `cd bluesky-kafka/bluesky_kafka/tests`
 * `pytest --kafka-bootstrap-servers "cmb01:9092, cmb02:9092, cmb03:9092"`
 
+
+# Other notes
+
 ## Create the default topics
 * Currently creating topics with python is not working.
 * `python cp-ansible/create_bluesky_topics.py`
 
+## Service names
+* confluent-server.service
+* confluent-zookeeper.service
+* confluent-zookeeper.target
 
 
 # CP-Ansible
